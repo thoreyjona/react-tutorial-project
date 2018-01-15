@@ -1,95 +1,33 @@
 'use strict';
 
-// Contains our JSX
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-console.log('App.js is running!');
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var app = {
-    title: 'Indecision app',
-    subtitle: 'Put your life in the hands of a computer',
-    options: []
-};
+// Class often have an upper case letter as first, so people know its a class
+var Person = function () {
+    function Person() {
+        var name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Anonymous';
 
-var onFormSubmit = function onFormSubmit(e) {
-    e.preventDefault(); // Stops full page reload
+        _classCallCheck(this, Person);
 
-    var option = e.target.elements.option.value; // Get the text written in the box
-
-    if (option) {
-        app.options.push(option); // add to the array
-        e.target.elements.option.value = ''; // Clear the value
+        //this.name = name || 'test'; // If name is nothing, it gets set to test, old way.
+        this.name = name;
     }
-    renderApp();
-};
 
-var removeAll = function removeAll() {
-    app.options = [];
-    renderApp();
-};
+    _createClass(Person, [{
+        key: 'getGreeting',
+        value: function getGreeting() {
+            //return 'Hi. I am ' + this.name + '!'; // Same as below
+            return 'Hi. I am ' + this.name + '!';
+        }
+    }]);
 
-var onMakeDecision = function onMakeDecision() {
-    var randomNum = Math.floor(Math.random() * app.options.length);
-    var option = app.options[randomNum];
-    alert(option);
-};
-// null, undefined and boolean expressions do not show {true} - nothing
-var appRoot = document.getElementById('app');
+    return Person;
+}();
 
-var numbers = [55, 101, 1000];
+var me = new Person('Þórey Jóna Guðjónsdóttir');
+console.log(me.getGreeting());
 
-// JSX - Javascript XML (javascript syntax extension)
-var renderApp = function renderApp() {
-    var template = React.createElement(
-        'div',
-        null,
-        React.createElement(
-            'h1',
-            null,
-            app.title
-        ),
-        app.subtitle && React.createElement(
-            'p',
-            null,
-            app.subtitle
-        ),
-        React.createElement(
-            'p',
-            null,
-            app.options.length > 0 ? 'Here are your options' : 'No options'
-        ),
-        React.createElement(
-            'button',
-            { disabled: app.options.length === 0, onClick: onMakeDecision },
-            'What should I do?'
-        ),
-        React.createElement(
-            'button',
-            { onClick: removeAll },
-            'Remove All'
-        ),
-        React.createElement(
-            'ol',
-            null,
-            app.options.map(function (option) {
-                return React.createElement(
-                    'li',
-                    { key: option },
-                    option
-                );
-            })
-        ),
-        React.createElement(
-            'form',
-            { onSubmit: onFormSubmit },
-            React.createElement('input', { type: 'text', name: 'option' }),
-            React.createElement(
-                'button',
-                null,
-                'Add Option'
-            )
-        )
-    );
-    ReactDOM.render(template, appRoot);
-};
-
-renderApp();
+var other = new Person();
+console.log(other.getGreeting());
