@@ -24,8 +24,10 @@ const removeAll = () => {
     app.options = [];
     renderApp();
 }
-
+// null, undefined and boolean expressions do not show {true} - nothing
 const appRoot = document.getElementById('app');
+
+const numbers = [55, 101, 1000];
 
 // JSX - Javascript XML (javascript syntax extension)
 const renderApp = () => {
@@ -37,8 +39,11 @@ const renderApp = () => {
             <p>{app.options.length}</p>
             <button onClick={removeAll}>Remove All</button>
             <ol>
-                <li>Item one</li>
-                <li>Item two</li>
+                {
+                    app.options.map((option) => {
+                        return <li key={option}>{option}</li>;
+                    })
+                }
             </ol>
             <form onSubmit={onFormSubmit}>
                 <input type="text" name="option"/>

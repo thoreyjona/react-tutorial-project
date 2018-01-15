@@ -26,8 +26,10 @@ var removeAll = function removeAll() {
     app.options = [];
     renderApp();
 };
-
+// null, undefined and boolean expressions do not show {true} - nothing
 var appRoot = document.getElementById('app');
+
+var numbers = [55, 101, 1000];
 
 // JSX - Javascript XML (javascript syntax extension)
 var renderApp = function renderApp() {
@@ -62,16 +64,13 @@ var renderApp = function renderApp() {
         React.createElement(
             'ol',
             null,
-            React.createElement(
-                'li',
-                null,
-                'Item one'
-            ),
-            React.createElement(
-                'li',
-                null,
-                'Item two'
-            )
+            app.options.map(function (option) {
+                return React.createElement(
+                    'li',
+                    { key: option },
+                    option
+                );
+            })
         ),
         React.createElement(
             'form',
