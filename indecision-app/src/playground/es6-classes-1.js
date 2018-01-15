@@ -1,18 +1,20 @@
 
 // Class often have an upper case letter as first, so people know its a class
 class Person {
-    constructor(name = 'Anonymous') {
-        //this.name = name || 'test'; // If name is nothing, it gets set to test, old way.
+    constructor(name = 'Anonymous', age = 0) {
         this.name = name;
+        this.age = age;
     }
     getGreeting() {
-        //return 'Hi. I am ' + this.name + '!'; // Same as below
         return `Hi. I am ${this.name}!`
+    }
+    getDescription() {
+        return `${this.name} is ${this.age} year(s) old.`
     }
 }
 
-const me = new Person('Þórey Jóna Guðjónsdóttir');
-console.log(me.getGreeting());
+const me = new Person('Þórey Jóna Guðjónsdóttir', 25);
+console.log(me.getDescription());
 
 const other = new Person();
-console.log(other.getGreeting());
+console.log(other.getDescription());

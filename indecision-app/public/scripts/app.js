@@ -8,26 +8,31 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var Person = function () {
     function Person() {
         var name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Anonymous';
+        var age = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
         _classCallCheck(this, Person);
 
-        //this.name = name || 'test'; // If name is nothing, it gets set to test, old way.
         this.name = name;
+        this.age = age;
     }
 
     _createClass(Person, [{
         key: 'getGreeting',
         value: function getGreeting() {
-            //return 'Hi. I am ' + this.name + '!'; // Same as below
             return 'Hi. I am ' + this.name + '!';
+        }
+    }, {
+        key: 'getDescription',
+        value: function getDescription() {
+            return this.name + ' is ' + this.age + ' year(s) old.';
         }
     }]);
 
     return Person;
 }();
 
-var me = new Person('Þórey Jóna Guðjónsdóttir');
-console.log(me.getGreeting());
+var me = new Person('Þórey Jóna Guðjónsdóttir', 25);
+console.log(me.getDescription());
 
 var other = new Person();
-console.log(other.getGreeting());
+console.log(other.getDescription());
