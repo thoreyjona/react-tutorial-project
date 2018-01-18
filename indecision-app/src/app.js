@@ -1,4 +1,14 @@
 // With ES6 classes we can have no methods defined, with React components we have to define render 
+
+const obj = {
+    name: "Vikram",
+    getName() {
+        return this.name;
+    }
+};
+
+const getName = obj.getName.bind(obj);
+
 class IndecisionApp extends React.Component {
     render() {
         const title = "Indecision";
@@ -40,9 +50,15 @@ class Action extends React.Component{
 }
 
 class Options extends React.Component {
+    constructor(props) { // props here is the same as this.props below
+        super(props); // Bare minimum to override, need to have access to this.props
+        this.handleRemoveAll = this.handleRemoveAll.bind(this); // Making sure that wherever we call handleRemoveAll, 
+        // the context is correct
+    }
     handleRemoveAll() {
         alert("Remove All clicked");
     }
+    // Call bind(this) in onClick event to make sure handleRemoveAll has the same binding as render
     render() {
         return (
             <div>

@@ -9,6 +9,16 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 // With ES6 classes we can have no methods defined, with React components we have to define render 
+
+var obj = {
+    name: "Vikram",
+    getName: function getName() {
+        return this.name;
+    }
+};
+
+var getName = obj.getName.bind(obj);
+
 var IndecisionApp = function (_React$Component) {
     _inherits(IndecisionApp, _React$Component);
 
@@ -105,10 +115,16 @@ var Action = function (_React$Component3) {
 var Options = function (_React$Component4) {
     _inherits(Options, _React$Component4);
 
-    function Options() {
+    function Options(props) {
         _classCallCheck(this, Options);
 
-        return _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).apply(this, arguments));
+        // Bare minimum to override, need to have access to this.props
+        var _this4 = _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).call(this, props)); // props here is the same as this.props below
+
+
+        _this4.handleRemoveAll = _this4.handleRemoveAll.bind(_this4); // Making sure that wherever we call handleRemoveAll, 
+        // the context is correct
+        return _this4;
     }
 
     _createClass(Options, [{
@@ -116,6 +132,8 @@ var Options = function (_React$Component4) {
         value: function handleRemoveAll() {
             alert("Remove All clicked");
         }
+        // Call bind(this) in onClick event to make sure handleRemoveAll has the same binding as render
+
     }, {
         key: "render",
         value: function render() {
