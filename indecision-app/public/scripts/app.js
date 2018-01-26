@@ -9,6 +9,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 // With ES6 classes we can have no methods defined, with React components we have to define render 
+<<<<<<< HEAD
 
 var obj = {
     name: "Vikram",
@@ -58,10 +59,71 @@ var Header = function (_React$Component2) {
     }
 
     _createClass(Header, [{
+=======
+var IndecisionApp = function (_React$Component) {
+    _inherits(IndecisionApp, _React$Component);
+
+    function IndecisionApp(props) {
+        _classCallCheck(this, IndecisionApp);
+
+        var _this = _possibleConstructorReturn(this, (IndecisionApp.__proto__ || Object.getPrototypeOf(IndecisionApp)).call(this, props));
+
+        _this.handleDeleteOptions = _this.handleDeleteOptions.bind(_this);
+        _this.state = {
+            options: ["Thing one", "Thing two", "Thing three"]
+        };
+        return _this;
+    }
+
+    _createClass(IndecisionApp, [{
+        key: "handleDeleteOptions",
+        value: function handleDeleteOptions() {
+            this.setState(function () {
+                return {
+                    options: []
+                };
+            });
+        }
+    }, {
+>>>>>>> 6964b3bea315f30c64aa5ad6da95061bcd27ebe6
+        key: "render",
+        value: function render() {
+            var title = "Indecision";
+            var subtitle = "Put your life in the hands of a computer.";
+            return React.createElement(
+                "div",
+<<<<<<< HEAD
+=======
+                null,
+                React.createElement(Header, { title: title, subtitle: subtitle }),
+                React.createElement(Action, { hasOptions: this.state.options.length > 0 }),
+                React.createElement(Options, {
+                    options: this.state.options,
+                    handleDeleteOptions: this.handleDeleteOptions
+                }),
+                React.createElement(AddOption, null)
+            );
+        }
+    }]);
+
+    return IndecisionApp;
+}(React.Component);
+
+var Header = function (_React$Component2) {
+    _inherits(Header, _React$Component2);
+
+    function Header() {
+        _classCallCheck(this, Header);
+
+        return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
+    }
+
+    _createClass(Header, [{
         key: "render",
         value: function render() {
             return React.createElement(
                 "div",
+>>>>>>> 6964b3bea315f30c64aa5ad6da95061bcd27ebe6
                 null,
                 React.createElement(
                     "h1",
@@ -100,6 +162,7 @@ var Action = function (_React$Component3) {
             return React.createElement(
                 "div",
                 null,
+<<<<<<< HEAD
                 React.createElement(
                     "button",
                     { onClick: this.handlePick },
@@ -143,6 +206,41 @@ var Options = function (_React$Component4) {
                 React.createElement(
                     "button",
                     { onClick: this.handleRemoveAll },
+=======
+                React.createElement(
+                    "button",
+                    {
+                        onClick: this.handlePick,
+                        disabled: !this.props.hasOptions
+                    },
+                    "What should I do?"
+                )
+            );
+        }
+    }]);
+
+    return Action;
+}(React.Component);
+
+var Options = function (_React$Component4) {
+    _inherits(Options, _React$Component4);
+
+    function Options() {
+        _classCallCheck(this, Options);
+
+        return _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).apply(this, arguments));
+    }
+
+    _createClass(Options, [{
+        key: "render",
+        value: function render() {
+            return React.createElement(
+                "div",
+                null,
+                React.createElement(
+                    "button",
+                    { onClick: this.props.handleDeleteOptions },
+>>>>>>> 6964b3bea315f30c64aa5ad6da95061bcd27ebe6
                     "Remove All"
                 ),
                 this.props.options.map(function (option) {
@@ -195,6 +293,7 @@ var AddOption = function (_React$Component5) {
     }]);
 
     return AddOption;
+<<<<<<< HEAD
 }(React.Component);
 
 var Option = function (_React$Component6) {
@@ -221,4 +320,32 @@ var Option = function (_React$Component6) {
     return Option;
 }(React.Component);
 
+=======
+}(React.Component);
+
+var Option = function (_React$Component6) {
+    _inherits(Option, _React$Component6);
+
+    function Option() {
+        _classCallCheck(this, Option);
+
+        return _possibleConstructorReturn(this, (Option.__proto__ || Object.getPrototypeOf(Option)).apply(this, arguments));
+    }
+
+    _createClass(Option, [{
+        key: "render",
+        value: function render() {
+            return React.createElement(
+                "div",
+                null,
+                "Option: ",
+                this.props.optionText
+            );
+        }
+    }]);
+
+    return Option;
+}(React.Component);
+
+>>>>>>> 6964b3bea315f30c64aa5ad6da95061bcd27ebe6
 ReactDOM.render(React.createElement(IndecisionApp, null), document.getElementById('app'));

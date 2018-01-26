@@ -1,24 +1,30 @@
 // With ES6 classes we can have no methods defined, with React components we have to define render 
-
-const obj = {
-    name: "Vikram",
-    getName() {
-        return this.name;
-    }
-};
-
-const getName = obj.getName.bind(obj);
-
 class IndecisionApp extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
+        this.state = {
+            options: ["Thing one", "Thing two", "Thing three"]
+        }
+    }
+    handleDeleteOptions() {
+        this.setState(() => {
+            return {
+                options: []
+            }
+        })
+    }
     render() {
         const title = "Indecision";
         const subtitle = "Put your life in the hands of a computer.";
-        const options = ["Thing one", "Thing two", "Thing four"];
         return (
             <div>
                 <Header title={title} subtitle={subtitle}/>
-                <Action />
-                <Options options={options}/>
+                <Action hasOptions={this.state.options.length > 0}/>
+                <Options 
+                    options={this.state.options}
+                    handleDeleteOptions={this.handleDeleteOptions}
+                />
                 <AddOption />
             </div>
         );
@@ -43,26 +49,22 @@ class Action extends React.Component{
     render() {
         return (
             <div>
-            <button onClick={this.handlePick}>What should I do?</button>
+            <button 
+            onClick={this.handlePick}
+            disabled={!this.props.hasOptions}
+            >
+            What should I do?
+            </button>
             </div>
         );
     }
 }
 
 class Options extends React.Component {
-    constructor(props) { // props here is the same as this.props below
-        super(props); // Bare minimum to override, need to have access to this.props
-        this.handleRemoveAll = this.handleRemoveAll.bind(this); // Making sure that wherever we call handleRemoveAll, 
-        // the context is correct
-    }
-    handleRemoveAll() {
-        alert("Remove All clicked");
-    }
-    // Call bind(this) in onClick event to make sure handleRemoveAll has the same binding as render
     render() {
         return (
             <div>
-            <button onClick={this.handleRemoveAll}>Remove All</button>
+            <button onClick={this.props.handleDeleteOptions}>Remove All</button>
                 {
                     this.props.options.map((option) => <Option key={option} optionText={option}/>)
                 }                
