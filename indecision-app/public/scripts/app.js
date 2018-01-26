@@ -9,57 +9,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 // With ES6 classes we can have no methods defined, with React components we have to define render 
-<<<<<<< HEAD
-
-var obj = {
-    name: "Vikram",
-    getName: function getName() {
-        return this.name;
-    }
-};
-
-var getName = obj.getName.bind(obj);
-
-var IndecisionApp = function (_React$Component) {
-    _inherits(IndecisionApp, _React$Component);
-
-    function IndecisionApp() {
-        _classCallCheck(this, IndecisionApp);
-
-        return _possibleConstructorReturn(this, (IndecisionApp.__proto__ || Object.getPrototypeOf(IndecisionApp)).apply(this, arguments));
-    }
-
-    _createClass(IndecisionApp, [{
-        key: "render",
-        value: function render() {
-            var title = "Indecision";
-            var subtitle = "Put your life in the hands of a computer.";
-            var options = ["Thing one", "Thing two", "Thing four"];
-            return React.createElement(
-                "div",
-                null,
-                React.createElement(Header, { title: title, subtitle: subtitle }),
-                React.createElement(Action, null),
-                React.createElement(Options, { options: options }),
-                React.createElement(AddOption, null)
-            );
-        }
-    }]);
-
-    return IndecisionApp;
-}(React.Component);
-
-var Header = function (_React$Component2) {
-    _inherits(Header, _React$Component2);
-
-    function Header() {
-        _classCallCheck(this, Header);
-
-        return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
-    }
-
-    _createClass(Header, [{
-=======
 var IndecisionApp = function (_React$Component) {
     _inherits(IndecisionApp, _React$Component);
 
@@ -69,6 +18,7 @@ var IndecisionApp = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (IndecisionApp.__proto__ || Object.getPrototypeOf(IndecisionApp)).call(this, props));
 
         _this.handleDeleteOptions = _this.handleDeleteOptions.bind(_this);
+        _this.handlePick = _this.handlePick.bind(_this);
         _this.state = {
             options: ["Thing one", "Thing two", "Thing three"]
         };
@@ -85,18 +35,25 @@ var IndecisionApp = function (_React$Component) {
             });
         }
     }, {
->>>>>>> 6964b3bea315f30c64aa5ad6da95061bcd27ebe6
+        key: "handlePick",
+        value: function handlePick() {
+            var randomNum = Math.floor(Math.random() * this.state.options.length);
+            var option = this.state.options[randomNum];
+            alert(option);
+        }
+    }, {
         key: "render",
         value: function render() {
             var title = "Indecision";
             var subtitle = "Put your life in the hands of a computer.";
             return React.createElement(
                 "div",
-<<<<<<< HEAD
-=======
                 null,
                 React.createElement(Header, { title: title, subtitle: subtitle }),
-                React.createElement(Action, { hasOptions: this.state.options.length > 0 }),
+                React.createElement(Action, {
+                    hasOptions: this.state.options.length > 0,
+                    handlePick: this.handlePick
+                }),
                 React.createElement(Options, {
                     options: this.state.options,
                     handleDeleteOptions: this.handleDeleteOptions
@@ -123,7 +80,6 @@ var Header = function (_React$Component2) {
         value: function render() {
             return React.createElement(
                 "div",
->>>>>>> 6964b3bea315f30c64aa5ad6da95061bcd27ebe6
                 null,
                 React.createElement(
                     "h1",
@@ -152,65 +108,15 @@ var Action = function (_React$Component3) {
     }
 
     _createClass(Action, [{
-        key: "handlePick",
-        value: function handlePick() {
-            alert('handlePick');
-        }
-    }, {
         key: "render",
         value: function render() {
             return React.createElement(
                 "div",
                 null,
-<<<<<<< HEAD
-                React.createElement(
-                    "button",
-                    { onClick: this.handlePick },
-                    "What should I do?"
-                )
-            );
-        }
-    }]);
-
-    return Action;
-}(React.Component);
-
-var Options = function (_React$Component4) {
-    _inherits(Options, _React$Component4);
-
-    function Options(props) {
-        _classCallCheck(this, Options);
-
-        // Bare minimum to override, need to have access to this.props
-        var _this4 = _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).call(this, props)); // props here is the same as this.props below
-
-
-        _this4.handleRemoveAll = _this4.handleRemoveAll.bind(_this4); // Making sure that wherever we call handleRemoveAll, 
-        // the context is correct
-        return _this4;
-    }
-
-    _createClass(Options, [{
-        key: "handleRemoveAll",
-        value: function handleRemoveAll() {
-            alert("Remove All clicked");
-        }
-        // Call bind(this) in onClick event to make sure handleRemoveAll has the same binding as render
-
-    }, {
-        key: "render",
-        value: function render() {
-            return React.createElement(
-                "div",
-                null,
-                React.createElement(
-                    "button",
-                    { onClick: this.handleRemoveAll },
-=======
                 React.createElement(
                     "button",
                     {
-                        onClick: this.handlePick,
+                        onClick: this.props.handlePick,
                         disabled: !this.props.hasOptions
                     },
                     "What should I do?"
@@ -221,6 +127,11 @@ var Options = function (_React$Component4) {
 
     return Action;
 }(React.Component);
+
+//Options is getting rerendered with a new set of props.
+//Component like options can not change its own props but new props value
+// can be passed from parents and then it is rerendering
+
 
 var Options = function (_React$Component4) {
     _inherits(Options, _React$Component4);
@@ -240,7 +151,6 @@ var Options = function (_React$Component4) {
                 React.createElement(
                     "button",
                     { onClick: this.props.handleDeleteOptions },
->>>>>>> 6964b3bea315f30c64aa5ad6da95061bcd27ebe6
                     "Remove All"
                 ),
                 this.props.options.map(function (option) {
@@ -293,7 +203,6 @@ var AddOption = function (_React$Component5) {
     }]);
 
     return AddOption;
-<<<<<<< HEAD
 }(React.Component);
 
 var Option = function (_React$Component6) {
@@ -320,32 +229,4 @@ var Option = function (_React$Component6) {
     return Option;
 }(React.Component);
 
-=======
-}(React.Component);
-
-var Option = function (_React$Component6) {
-    _inherits(Option, _React$Component6);
-
-    function Option() {
-        _classCallCheck(this, Option);
-
-        return _possibleConstructorReturn(this, (Option.__proto__ || Object.getPrototypeOf(Option)).apply(this, arguments));
-    }
-
-    _createClass(Option, [{
-        key: "render",
-        value: function render() {
-            return React.createElement(
-                "div",
-                null,
-                "Option: ",
-                this.props.optionText
-            );
-        }
-    }]);
-
-    return Option;
-}(React.Component);
-
->>>>>>> 6964b3bea315f30c64aa5ad6da95061bcd27ebe6
 ReactDOM.render(React.createElement(IndecisionApp, null), document.getElementById('app'));
