@@ -11,6 +11,33 @@ class IndecisionApp extends React.Component {
             options: props.options
         }
     }
+    //Lifecycle methods
+    componentDidMount() {
+      try {
+        const json = localStorage.getItem('options');
+        const options = JSON.parse(json);
+  
+        if (options) {
+          this.setState(() => ({ options: options }));
+        }
+
+      } catch (e) {
+        // Do nothing
+      }
+
+    }
+    // Fires even if options array doesn´t change
+    componentDidUpdate(prevProp, prevState) {
+      if (prevState.options.length != this.state.options.length){
+        const json = JSON.stringify(this.state.options);
+        localStorage.setItem('options', json);
+        console.log('saving data');
+      }
+    }
+    // When we switch pages (component disappears )
+    componentWillUnmount() {
+      console.log('ComponentWillUnmount');
+    }
     handleDeleteOptions() {
       this.setState(() => ({ options: [] }));
     }
@@ -103,14 +130,15 @@ const Options = (props) => {
   return (
     <div>
     <button onClick={props.handleDeleteOptions}>Remove All</button>
-        {
+      {props.options.length === 0 && <p>Please add an option to get started</p>}
+      {
             props.options.map((option) => (
             <Option key={option} 
             optionText={option}
             handleDeleteOption={props.handleDeleteOption}
             />
           ))
-        }                
+      }                
     </div>
   );
 }
@@ -130,6 +158,10 @@ class AddOption extends React.Component {
         const error = this.props.handleAddOptions(option);
         
         this.setState(() => ({ error })); 
+
+        if (!error) {
+          e.target.elements.option.value = ''; // Clear input 
+        }
 
     }
     render() {
