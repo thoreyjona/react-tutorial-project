@@ -13,7 +13,7 @@ const decrementCount = ({decrementBy = 1} = {}) => ({
     decrementBy
 });
 
-const setCount = ({count = 0} = {}) => ({
+const setCount = ({count} = {}) => ({
     type: 'SET',
     count
 });
@@ -22,7 +22,20 @@ const resetCount = () => ({
     type: 'RESET'
 });
 
-const store = createStore((state = { count: 0 }, action) => {
+// Reducers
+//1. Reducers are pure functions
+//2. Never change state or action
+
+// This is not a pure function, the output does not depend on the input, 
+//also on the global variable a, that could change. If it changing a variable 
+//outside of the scope it is not pure either.
+let a = 10;
+const add = (b) => {
+    return a + b;
+}
+
+
+const countReducer = ((state = { count: 0 }, action) => {
     switch (action.type) {
         case 'INCREMENT':
             return {
@@ -45,12 +58,13 @@ const store = createStore((state = { count: 0 }, action) => {
     }
 });
 
+const store = createStore(countReducer);
+
 const unsubscribe = store.subscribe(() => {
     console.log(store.getState());
 });
 
 //Actions - than an object that gets sent to the store
-
 //I'd like to increment the count
 // store.dispatch({
 //     type: 'INCREMENT',
