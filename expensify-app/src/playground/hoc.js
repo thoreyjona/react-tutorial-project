@@ -24,7 +24,7 @@ const withAdminWarning = (WrappedComponent) => {
     );
 };
 
-
+// Regular function that returns the HOC, this is not A HOC
 const requireAuthentication = (WrappedComponent) => {
     return (props) => (
         <div>
