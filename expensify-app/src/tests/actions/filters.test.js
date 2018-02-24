@@ -34,14 +34,14 @@ test('should generate set text filter action object with default value', () => {
     });
 });
 
-test('should generate sort by amount action object', () => {
+test('should generate action object for sort by amount', () => {
     const action = sortByAmount();
     expect(action).toEqual({
         type: 'SORT_BY_AMOUNT'
     });
 });
 
-test ('should generate sort by date action object', () => {
+test ('should generate action object for  sort by date', () => {
     const action = sortByDate();
     expect(action).toEqual({
         type: 'SORT_BY_DATE'
