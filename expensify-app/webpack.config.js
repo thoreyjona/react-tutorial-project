@@ -1,12 +1,14 @@
 const path = require('path');
 
-module.exports = {
-  entry: './src/app.js',
-  output: {
+module.exports = (env) => {
+  const isProduction = env === 'production';
+  return {
+    entry: './src/app.js',
+    output: {
       path: path.join(__dirname, 'public'),
       filename: 'bundle.js'
-  },
-  module: {
+    },
+    module: {
       rules: [{
         loader: 'babel-loader',
         test: /\.js$/,
@@ -19,12 +21,13 @@ module.exports = {
           'sass-loader'
         ]
       }]
-  },
-  devtool: 'cheap-module-eval-source-map',
-  devServer: {
-    contentBase: path.join(__dirname, 'public'),
-    historyApiFallback: true // Tells the server we will be doing routing via client site
+    },
+    devtool: isProduction ? 'source-map' : 'cheap-module-eval-source-map',
+    devServer: {
+      contentBase: path.join(__dirname, 'public'),
+      historyApiFallback: true // Tells the server we will be doing routing via client site
+    }
   }
-};
+}
 
 // Loader lets you customize the behavior of webpack
