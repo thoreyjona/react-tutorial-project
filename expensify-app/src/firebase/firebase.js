@@ -14,7 +14,49 @@ const config = {
 
  const database = firebase.database();
 
- database.ref().set({
+ const onValueChange = database.ref()
+  .on('value', (snapshot) => {
+      const val = snapshot.val();
+      console.log(`${val.name} is a ${val.job.title} at ${val.job.company}.`);
+  });
+
+  setTimeout(() => {
+    database.ref('name').set('Þórey Guðjónsdóttir');
+  }, 3500);
+
+
+
+ /*const onValueChange = database.ref()
+  .on('value', (snapshot) => {
+    console.log(snapshot.val());
+  }, (e) => {
+    console.log('Error with data fetching', e); 
+  });
+
+  setTimeout(() => {
+    database.ref('age').set(32);
+  }, 3500);
+
+  setTimeout(() => {
+    database.ref().off(onValueChange);
+  }, 7000);
+
+  setTimeout(() => {
+    database.ref('age').set(35);
+  }, 10500);*/
+
+ // Get the data once, functions run once
+ /*database.ref('location/city')
+    .once('value')
+    .then((snapshot)=> {
+        const val = snapshot.val();
+        console.log(val);
+    })
+    .catch((e) => {
+        console.log('Error fetching data', e);
+    });*/
+
+ /*database.ref().set({
     name: 'Þórey Guðjónsdóttir',
     age: 25,
     job: {
@@ -30,7 +72,7 @@ const config = {
       console.log('Data is saved!');
   }).catch((e) => {
     console.log('This failed.', e);
-  });
+  });*/
 
 
   /* database.ref().update({
@@ -40,11 +82,11 @@ const config = {
     isSingle: null
   }); */
 
-  database.ref().update({
+  /*database.ref().update({
       stressLevel: 9,
       'job/company' : 'Amazon',
       'location/city': 'Seattle'
-  });
+  });*/
 
   /*database.ref('isSingle')
   .remove()
