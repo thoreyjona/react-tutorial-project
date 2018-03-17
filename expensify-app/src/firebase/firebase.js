@@ -28,15 +28,13 @@ const config = {
     console.log('This failed.', e);
   });
 
-  // database.ref().set('This is my data');
+  // Does the same as remove.
+  database.ref('isSingle').set(null);
 
-  // database.ref('age').set(26);
-  // database.ref('location/city').set('Akureyri');
-  database.ref('attributes').set({
-      height: 161,
-      weight: 60
-  }).then(() => {
-      console.log('DATA IS SAVED!');
+  /*database.ref('isSingle')
+  .remove()
+  .then(() => {
+    console.log('Remove succeded!');
   }).catch((e) => {
-    console.log('OOOPS something went wrong!', e);
-  })
+      console.log('Something went wrong in removing.')
+  })*/
