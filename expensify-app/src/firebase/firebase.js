@@ -17,7 +17,11 @@ const config = {
  database.ref().set({
     name: 'Þórey Guðjónsdóttir',
     age: 25,
-    isSingle: false,
+    job: {
+        title: 'Software Developer',
+        company: 'Google' 
+    },
+    stressLevel: 7,
     location: {
         city: 'Reykjavík',
         country: 'Iceland'
@@ -28,8 +32,19 @@ const config = {
     console.log('This failed.', e);
   });
 
-  // Does the same as remove.
-  database.ref('isSingle').set(null);
+
+  /* database.ref().update({
+    name: 'Bob',
+    age: 34,
+    job: 'Software Developer',
+    isSingle: null
+  }); */
+
+  database.ref().update({
+      stressLevel: 9,
+      'job/company' : 'Amazon',
+      'location/city': 'Seattle'
+  });
 
   /*database.ref('isSingle')
   .remove()
