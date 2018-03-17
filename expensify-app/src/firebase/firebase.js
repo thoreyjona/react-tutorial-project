@@ -14,56 +14,38 @@ firebase.initializeApp(config);
 
 const database = firebase.database();
 
-database.ref('expenses').push({
+// child_removed
+database.ref('expenses').on('child_removed', (snapshot) => {
+    console.log(snapshot.key, snapshot.val());
+});
+
+// child_changed
+database.ref('expenses').on('child_changed', (snapshot) => {
+    console.log(snapshot.key, snapshot.val());
+});
+
+// child_added - gets called for all child inital, not just added
+database.ref('expenses').on('child_added', (snapshot) => {
+    console.log(snapshot.key, snapshot.val());
+});
+
+// First version
+/* database.ref('expenses')
+  .on('value', (snapshot) => {
+      const expenses = [];
+
+      snapshot.forEach((childSnapshot) => {
+        expenses.push({
+            id: childSnapshot.key,
+            ...childSnapshot.val()
+        });
+      });
+      console.log(expenses);
+  });
+*/
+ database.ref('expenses').push({
     description: 'Rent',
     note: '',
     amount: 123,
     createdAt: 1000
-});
-
-database.ref('expenses').push({
-    description: 'Make up',
-    note: '',
-    amount: 14555,
-    createdAt: 12312312312
-});
-
-database.ref('expenses').push({
-    description: 'School stuff',
-    note: '',
-    amount: 14500,
-    createdAt: 94565463
-});
-
-// database.ref('notes/-L7nqjyHDHacYyqtqnjK').remove();
-
-/* database.ref('notes').push({
-    title: 'Course Topics',
-    body: 'React Native, Angular, Python'
-});*/ 
-
-
-/* const firebaseNotes = {
-    notes: {
-        asdasda: {
-            title: 'First Note',
-            body: 'This is my note'
-        },
-        xxx: {
-            title: 'Second Note',
-            body: 'This is my note'
-        }
-    }
-}
-
-const notes = [{
-     id: '12',
-     title: 'First Note',
-     body: 'This is my note'
-}, {
-    id: '77',
-    title: 'Second Note',
-    body: 'This is my note' 
-}];
-
-database.ref('notes').set(notes); */
+}); 
