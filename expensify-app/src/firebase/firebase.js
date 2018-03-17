@@ -10,88 +10,60 @@ const config = {
     messagingSenderId: "784009318711"
   };
 
-  firebase.initializeApp(config);
+firebase.initializeApp(config);
 
- const database = firebase.database();
+const database = firebase.database();
 
- const onValueChange = database.ref()
-  .on('value', (snapshot) => {
-      const val = snapshot.val();
-      console.log(`${val.name} is a ${val.job.title} at ${val.job.company}.`);
-  });
+database.ref('expenses').push({
+    description: 'Rent',
+    note: '',
+    amount: 123,
+    createdAt: 1000
+});
 
-  setTimeout(() => {
-    database.ref('name').set('Þórey Guðjónsdóttir');
-  }, 3500);
+database.ref('expenses').push({
+    description: 'Make up',
+    note: '',
+    amount: 14555,
+    createdAt: 12312312312
+});
+
+database.ref('expenses').push({
+    description: 'School stuff',
+    note: '',
+    amount: 14500,
+    createdAt: 94565463
+});
+
+// database.ref('notes/-L7nqjyHDHacYyqtqnjK').remove();
+
+/* database.ref('notes').push({
+    title: 'Course Topics',
+    body: 'React Native, Angular, Python'
+});*/ 
 
 
-
- /*const onValueChange = database.ref()
-  .on('value', (snapshot) => {
-    console.log(snapshot.val());
-  }, (e) => {
-    console.log('Error with data fetching', e); 
-  });
-
-  setTimeout(() => {
-    database.ref('age').set(32);
-  }, 3500);
-
-  setTimeout(() => {
-    database.ref().off(onValueChange);
-  }, 7000);
-
-  setTimeout(() => {
-    database.ref('age').set(35);
-  }, 10500);*/
-
- // Get the data once, functions run once
- /*database.ref('location/city')
-    .once('value')
-    .then((snapshot)=> {
-        const val = snapshot.val();
-        console.log(val);
-    })
-    .catch((e) => {
-        console.log('Error fetching data', e);
-    });*/
-
- /*database.ref().set({
-    name: 'Þórey Guðjónsdóttir',
-    age: 25,
-    job: {
-        title: 'Software Developer',
-        company: 'Google' 
-    },
-    stressLevel: 7,
-    location: {
-        city: 'Reykjavík',
-        country: 'Iceland'
+/* const firebaseNotes = {
+    notes: {
+        asdasda: {
+            title: 'First Note',
+            body: 'This is my note'
+        },
+        xxx: {
+            title: 'Second Note',
+            body: 'This is my note'
+        }
     }
-  }).then(() => {
-      console.log('Data is saved!');
-  }).catch((e) => {
-    console.log('This failed.', e);
-  });*/
+}
 
+const notes = [{
+     id: '12',
+     title: 'First Note',
+     body: 'This is my note'
+}, {
+    id: '77',
+    title: 'Second Note',
+    body: 'This is my note' 
+}];
 
-  /* database.ref().update({
-    name: 'Bob',
-    age: 34,
-    job: 'Software Developer',
-    isSingle: null
-  }); */
-
-  /*database.ref().update({
-      stressLevel: 9,
-      'job/company' : 'Amazon',
-      'location/city': 'Seattle'
-  });*/
-
-  /*database.ref('isSingle')
-  .remove()
-  .then(() => {
-    console.log('Remove succeded!');
-  }).catch((e) => {
-      console.log('Something went wrong in removing.')
-  })*/
+database.ref('notes').set(notes); */
