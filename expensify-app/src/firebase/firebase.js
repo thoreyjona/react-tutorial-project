@@ -14,7 +14,9 @@ firebase.initializeApp(config);
 
 const database = firebase.database();
 
-// child_removed
+export { firebase, database as default };
+
+/* // child_removed
 database.ref('expenses').on('child_removed', (snapshot) => {
     console.log(snapshot.key, snapshot.val());
 });
@@ -42,10 +44,10 @@ database.ref('expenses').on('child_added', (snapshot) => {
       });
       console.log(expenses);
   });
-*/
+
  database.ref('expenses').push({
     description: 'Rent',
     note: '',
     amount: 123,
     createdAt: 1000
-}); 
+}); */
