@@ -37,6 +37,14 @@ export const editExpense = (id, updates) => ({
     updates
 }); 
 
+// SET_EXPENSES
+export const setExpenses = (expenses) => ({
+    type: 'SET_EXPENSES',
+    expenses
+});
+
+//export const startSetExpenses;
+
 // component calls action generator
 // action generator returns object
 // component dispatches object
