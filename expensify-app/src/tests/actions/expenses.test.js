@@ -67,7 +67,7 @@ test('should add expense with defaults to database and store', (done) => {
         createdAt: 0
     };
 
-    store.dispatch(startAddExpense({expenseData})).then(() => {
+    store.dispatch(startAddExpense({expenseDefaults})).then(() => {
         const actions = store.getActions();
         expect(actions[0]).toEqual({
             type: 'ADD_EXPENSE',
