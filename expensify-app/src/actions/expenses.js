@@ -25,6 +25,25 @@ export const startAddExpense = (expenseData = {}) => {
     };
 };
 
+export const startSetExpenses = () => {
+    return (dispatch) => {
+        return database.ref('expenses')
+        .once('value')
+        .then((snapshot) => {
+            const expenses = [];
+
+            snapshot.forEach((childSnapshot) => {
+                expenses.push({
+                    id: childSnapshot.key,
+                    ...childSnapshot.val()
+                });
+            });
+            dispatch(setExpenses(expenses));
+        });
+        
+    }
+};
+
 // REMOVE_EXPENSE
 export const removeExpense = ({id} = {}) => ({
     type: 'REMOVE_EXPENSE',
@@ -43,7 +62,10 @@ export const setExpenses = (expenses) => ({
     expenses
 });
 
-//export const startSetExpenses;
+// 1. Fetch all expense data once
+// 2. Parse that data into an array
+// 3. Dispatch SET_EXPENSES
+
 
 // component calls action generator
 // action generator returns object
